@@ -2,8 +2,8 @@
  * 初始化新闻动态管理详情对话框
  */
 var NewsInfoDlg = {
-    newsInfoData : {}
-};
+    newsInfoData: {}
+}
 
 /**
  * 清除数据

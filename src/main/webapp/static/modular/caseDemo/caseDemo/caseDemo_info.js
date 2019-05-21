@@ -2,7 +2,44 @@
  * 初始化案例管理详情对话框
  */
 var CaseDemoInfoDlg = {
-    caseDemoInfoData : {}
+    caseDemoInfoData : {},
+    validateFields: {
+        serviceId: {
+            validators: {
+                notEmpty: {
+                    message: '类型不能为空'
+                }
+            }
+        },
+        title: {
+            validators: {
+                notEmpty: {
+                    message: '标题不能为空'
+                }
+            }
+        },
+        details: {
+            validators: {
+                notEmpty: {
+                    message: '详情不能为空'
+                }
+            }
+        },
+        describe: {
+            validators: {
+                notEmpty: {
+                    message: '描述不能为空'
+                }
+            }
+        },
+        imgLink: {
+            validators: {
+                notEmpty: {
+                    message: '图片地址不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -58,12 +95,25 @@ CaseDemoInfoDlg.collectData = function() {
 }
 
 /**
+ * 验证数据是否为空
+ */
+CaseDemoInfoDlg.validate = function () {
+    $('#caseInfoForm').bootstrapValidator('validate');
+    return $("#caseInfoForm").data('bootstrapValidator').isValid();
+};
+
+
+/**
  * 提交添加
  */
 CaseDemoInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
+
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/caseDemo/add", function(data){
@@ -98,5 +148,5 @@ CaseDemoInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    Feng.initValidator("caseInfoForm", CaseDemoInfoDlg.validateFields);
 });
