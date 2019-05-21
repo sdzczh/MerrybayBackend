@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.CaseDemoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.CaseDemo">
+        <id column="id" property="id" />
+        <result column="service_id" property="serviceId" />
+        <result column="details" property="details" />
+        <result column="img_link" property="imgLink" />
+        <result column="aa" property="aa" />
+        <result column="bb" property="bb" />
+        <result column="title" property="title" />
+        <result column="describe" property="describe" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, service_id, details, img_link, aa, bb, create_time, update_time, title, describe
+    </sql>
+
+    <select id="selectLists" resultType="java.util.Map">
+    SELECT cd.id, cd.title, cd.details, cd.describe, sp.type, cd.img_link, cd.update_time, cd.create_time
+    from case_demo cd LEFT JOIN service_provider sp on sp.id=(cd.service_id+1)
+    where 1 = 1
+    <if test="serviceId != '' and serviceId != null">
+        and sp.type = #{serviceId}
+    </if>
+        order by cd.id desc
+    </select>
+</mapper>

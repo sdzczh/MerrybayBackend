@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.NewsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.News">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="title" property="title" />
+        <result column="describe" property="describe" />
+        <result column="details" property="details" />
+        <result column="img_link" property="imgLink" />
+        <result column="aa" property="aa" />
+        <result column="bb" property="bb" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, title, describe, details, img_link, aa, bb, create_time, update_time
+    </sql>
+
+</mapper>

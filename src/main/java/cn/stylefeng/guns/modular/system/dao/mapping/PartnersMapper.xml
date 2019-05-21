@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.PartnersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.Partners">
+        <id column="id" property="id" />
+        <result column="img_name" property="imgName" />
+        <result column="img_link" property="imgLink" />
+        <result column="describe" property="describe" />
+        <result column="link" property="link" />
+        <result column="aa" property="aa" />
+        <result column="bb" property="bb" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, img_name, img_link, describe, link, aa, bb, create_time, update_time
+    </sql>
+
+</mapper>

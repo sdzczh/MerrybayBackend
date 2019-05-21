@@ -1,0 +1,40 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    &nbsp;&nbsp;&nbsp;<b>岗位类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                    <select name="category" id="category"  style="width: 240px;height: 30px;margin-bottom: 30px" >
+                        <option value="">请选择岗位类型</option>
+                        <option value="0">APP开发</option>
+                        <option value="1">网站建设</option>
+                        <option value="2">微信小程序</option>
+                    </select>
+                            <#input id="place" name="招聘地点" underline="true"/>
+                            <#input id="email" name="邮箱" underline="true"/>
+                            <#input id="phone" name="电话" underline="true"/>
+                            <#input id="num" name="招聘人数" underline="true"/>
+                            <#input id="year" name="工作经验(年数)"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="jobsName" name="岗位名称" underline="true"/>
+                            <#input id="jobsRequire" name="岗位要求" underline="true"/>
+                            <#input id="jobsDuty" name="岗位职责" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="HumanInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="HumanInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/human/human/human_info.js"></script>
+@}
