@@ -78,7 +78,7 @@ public class PartnersController extends BaseController {
         }
 
         String fileName = img_url.getOriginalFilename();
-        String filePath = "C:/Users/12778/Desktop/img/";
+        String filePath = "/home/installPackage/imgs/";
         File dest = new File(filePath + fileName);
         try {
             img_url.transferTo(dest);

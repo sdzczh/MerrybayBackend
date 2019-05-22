@@ -138,24 +138,6 @@ public class CaseDemoController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(CaseDemo caseDemo) {
-        /*if(StringUtils.isEmpty(title)){
-            return FileUploadUtils.getError("标题不能为空");
-        }
-        if (StringUtils.isEmpty(serviceId)){
-            return FileUploadUtils.getError("案例类型不能为空");
-        }
-        if (StringUtils.isEmpty(describe)){
-            return FileUploadUtils.getError("描述不能为空");
-        }
-        if (StringUtils.isEmpty(content)){
-            return FileUploadUtils.getError("详情不能为空");
-        }
-        content = content.replaceAll("& ", "&");
-        caseDemo.setTitle(title);
-        caseDemo.setServiceId(Integer.parseInt(serviceId));
-        caseDemo.setDescribe(describe);
-        caseDemo.setImgLink(imgLink);
-        caseDemo.setDetails(content);*/
         caseDemoService.insert(caseDemo);
         return SUCCESS_TIP;
     }
