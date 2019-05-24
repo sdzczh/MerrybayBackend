@@ -1,6 +1,7 @@
 package cn.stylefeng.guns.modular.human.controller;
 
 import cn.hutool.core.util.StrUtil;
+import cn.stylefeng.guns.core.common.FileUploadUtils;
 import cn.stylefeng.guns.modular.system.warpper.HumanWarpper;
 import cn.stylefeng.guns.modular.system.warpper.JobsWarpper;
 import cn.stylefeng.guns.modular.system.warpper.NewsWarpper;
@@ -8,16 +9,17 @@ import cn.stylefeng.roses.core.base.controller.BaseController;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
-import org.springframework.web.bind.annotation.RequestParam;
 import cn.stylefeng.guns.modular.system.model.Human;
 import cn.stylefeng.guns.modular.human.service.IHumanService;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +55,39 @@ public class HumanController extends BaseController {
     }
 
     /**
+     * 富文本工具上传图片
+     * @param request
+     * @param response
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/fileUpload", method = RequestMethod.POST)
+    public Map<String, Object> fileUpload(HttpServletRequest request, HttpServletResponse response){
+        try {
+            return FileUploadUtils.fileUpload(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @RequestMapping(value = "/fileManager", method = RequestMethod.GET)
+    public static void fileManager(HttpServletRequest request,
+                                   HttpServletResponse response) throws ServletException, IOException {
+        FileUploadUtils.fileManager(request,response);
+    }
+    /**
+     *author:zhaohe
+     * IO流读取图片
+     * @param imgUrl 图片url
+     */
+    @RequestMapping(value = "/showImg",method = RequestMethod.GET)
+    public void ioReadImage(String imgUrl, HttpServletResponse response)throws IOException {
+        FileUploadUtils.ioReadImage(imgUrl,response);
+    }
+
+    /**
      * 跳转到修改人力资源管理
      */
     @RequestMapping("/human_update/{humanId}")
@@ -82,10 +117,11 @@ public class HumanController extends BaseController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(Human human) {
-/*        if("".equals(human.getCategory()) || human.getCategory() == null){
-            return "类型不能为空";
-        }*/
+    public Object add(Human human, String content, String jobsDuty ) {
+        content = content.replaceAll("& ","&");
+        human.setJobsRequire(content);
+        jobsDuty = jobsDuty.replaceAll("& ","&");
+        human.setJobsDuty(jobsDuty);
         humanService.insert(human);
         return SUCCESS_TIP;
     }
@@ -105,7 +141,12 @@ public class HumanController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(Human human) {
+    public Object update(Human human, String content, Integer id, String jobsDuty) {
+        human.setId(id);
+        content = content.replaceAll("& ","&");
+        human.setJobsRequire(content);
+        jobsDuty = jobsDuty.replaceAll("& ","&");
+        human.setJobsDuty(jobsDuty);
         humanService.updateById(human);
         return SUCCESS_TIP;
     }

@@ -7,6 +7,7 @@
                 <div class="row">
                     <form method="post" action="/serviceProvider/add" enctype="multipart/form-data">
                         <div class="col-sm-6 b-r">
+                            <#input id="bb" name="标题" underline="true"/>
                             &nbsp;&nbsp;&nbsp;<b>服务类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                             <select name="type" id="type"  style="width: 240px;height: 30px;margin-bottom: 30px" >
                                 <option value="">请选择服务类型</option>
@@ -16,6 +17,7 @@
                             </select>
                             <#input id="imgName" name="图片名称" underline="true"/>
                             <#input id="describe" name="描述"/>
+
                             选择图片：<input type="file" name="img_url" id="img_url" class="form-control">
                         </div>
                         <div class="form-group">

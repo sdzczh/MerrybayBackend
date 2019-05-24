@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.LedInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.LedInfo">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="name" property="name" />
+        <result column="img_link" property="imgLink" />
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, name, img_link, state create_time, update_time
+    </sql>
+    <select id="selectImgLink" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select type, name, img_link from led_info where type = 0;
+    </select>
+    <select id="selectStateByType" parameterType="Integer" resultType="Integer">
+        SELECT state FROM led_info WHERE TYPE=#{type} LIMIT 0,1
+    </select>
+    <select id="selectVido" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select type, name, img_link from led_info where type = 1;
+    </select>
+    <select id="selectByState" resultType="map">
+        SELECT li.type, img_link FROM led_info li WHERE state = 1;
+    </select>
+    <update id="updateImgByType">
+        update led_info set state = 1 WHERE type = 0;
+    </update>
+    <update id="updateVideoByType">
+        update led_info set state = 1 WHERE type = 1;
+    </update>
+    <update id="updateState">
+        UPDATE led_info SET state = 1 - state;
+    </update>
+</mapper>

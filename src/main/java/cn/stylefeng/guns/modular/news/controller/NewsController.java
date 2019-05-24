@@ -138,20 +138,8 @@ public class NewsController extends BaseController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(News news, String content, String title, Integer type, String describe) {
-        if(StringUtils.isEmpty(title)){
-            return FileUploadUtils.getError("标题不能为空");
-        }
-        if ("".equals(type) || type == null){
-            return FileUploadUtils.getError("文章类型不能为空");
-        }
-        if (StringUtils.isEmpty(describe)){
-            return FileUploadUtils.getError("描述不能为空");
-        }
-        if (StringUtils.isEmpty(content)){
-            return FileUploadUtils.getError("详情不能为空");
-        }
-        content = content.replaceAll("& ", "&");
+    public Object add(News news, String content ) {
+        content = content.replaceAll("& ","&");
         news.setDetails(content);
         newsService.insert(news);
         return SUCCESS_TIP;
@@ -172,7 +160,9 @@ public class NewsController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(News news) {
+    public Object update(News news, String content ) {
+        content = content.replaceAll("& ","&");
+        news.setDetails(content);
         newsService.updateById(news);
         return SUCCESS_TIP;
     }

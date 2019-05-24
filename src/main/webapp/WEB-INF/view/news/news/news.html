@@ -27,7 +27,7 @@
                                 <#button name="添加" icon="fa-plus" clickFun="News.openAddNews()"/>
                             @}
                            @if(shiro.hasPermission("/news/update")){
-                                <!--<#button name="修改" icon="fa-edit" clickFun="News.openNewsDetail()" space="true"/>-->
+                                <#button name="修改" icon="fa-edit" clickFun="News.openNewsDetail()" space="true"/>
                             @}
                             <#button name="查看详情" icon="fa-plus" clickFun="News.openShow()"/>
                             @if(shiro.hasPermission("/news/delete")){

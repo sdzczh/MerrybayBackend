@@ -6,12 +6,17 @@
             <div class="row">
                 <div class="col-sm-12 b-r">
                     <#input id="title" name="标题" underline="true"/>
-                    <b style="margin-left: 105px;margin-bottom: 500px">文章类型</b>
+                    <div style="margin-left: 107px"><b>文章类型</b></div>
+                    <select id="type" name="type" class="form-control" style="width: 529px;margin-left:185px;margin-top:-27px;margin-bottom:20px;">
+                        <option value="0">行业新闻</option>
+                        <option value="1">公司动态</option>
+                    </select>
+                    <!--<div style="margin-left: 107px"><b>文章类型</b></div>
                     <select id="type" class="form-control" style="width: 525px;height: 35px;margin-bottom: 50px;margin-left: 190px">
                         <option value="">请选择文章类型</option>
                         <option value="0">行业新闻</option>
                         <option value="1">公司动态</option>
-                    </select>
+                    </select>-->
                     <#input id="describe" name="描述" underline="true"/>
                             <!--<#input id="type" name="0:行业新闻,1:公司动态" underline="true"/>-->
                             <!--<#input id="details" name="详情"/>-->

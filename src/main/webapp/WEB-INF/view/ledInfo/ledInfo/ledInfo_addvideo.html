@@ -1,0 +1,53 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                            <!--<#input id="name" name="标题"/>
+                            <#input id="type" name="图片"  underline="true"/>
+                            <#input id="type" name="视频"  underline="true"/>
+                            <#input id="imgLink" name="图片地址" underline="true"/>-->
+                <form method="post" id="startFlowForm" action="/ledInfo/addvideo" enctype="multipart/form-data">
+                    <#input id="name" name="标题" underline="true"/>
+                    <!--<#input id="type" name="图片"  underline="true"/>-->
+                    <div style="margin-left: 111px"><b>上传类型</b></div>
+                    <select id="type" name="type" class="form-control" style="width: 550px;margin-left:193px;margin-top:-27px;margin-bottom:20px;" readonly="readonly">
+                        <option value="1">视频</option>
+                    </select>
+                    <#input id="imgLink" name="视频路径" underline="true"/>-->
+                    <div class="form-group" style="margin-left: 109px;margin-top: 10px;">
+                        <input type="button" class="btn btn-primary" value="提交" onclick="sub()">
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LedInfoInfoDlg.close()"/>
+                    </div>
+                </form>
+            </div>
+            <!--<div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="LedInfoInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="LedInfoInfoDlg.close()"/>
+                </div>
+            </div>-->
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/ledInfo/ledInfo/ledInfo_info.js"></script>
+<script src="${ctxPath}/static/js/jquery.form.js"></script>
+<script type="text/javascript">
+    function sub() {
+        $("#startFlowForm").ajaxSubmit(function (data) {
+            if (data === "false") {
+                Feng.error("添加失败，视频已存在！");
+                window.parent.LedInfo.table.refresh();
+                LedInfoInfoDlg.close();
+            } else {
+                Feng.success("添加成功!");
+                window.parent.LedInfo.table.refresh();
+                LedInfoInfoDlg.close();
+            };
+        });
+
+    }
+</script>
+@}

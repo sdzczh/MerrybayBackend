@@ -1,21 +1,12 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
-
-            <div class="row">
-                <div class="col-sm-6 b-r">
+        <div class="form-horizontal" id="conInfoForm">
                             <#input id="name" name="姓名" underline="true"/>
                             <#input id="companyName" name="公司名称" underline="true"/>
                             <#input id="phone" name="手机" underline="true"/>
                             <#input id="email" name="邮箱"/>
-                </div>
-
-                <div class="col-sm-6">
-                            <#input id="note" name="备注" underline="true"/>
-                </div>
-            </div>
-
+                    <#input id="note" name="备注" underline="true"/>
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ConsultingserviceInfoDlg.addSubmit()"/>

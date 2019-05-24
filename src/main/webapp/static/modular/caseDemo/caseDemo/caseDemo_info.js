@@ -4,13 +4,6 @@
 var CaseDemoInfoDlg = {
     caseDemoInfoData : {},
     validateFields: {
-        serviceId: {
-            validators: {
-                notEmpty: {
-                    message: '类型不能为空'
-                }
-            }
-        },
         title: {
             validators: {
                 notEmpty: {
@@ -134,6 +127,7 @@ CaseDemoInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
+
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/caseDemo/update", function(data){

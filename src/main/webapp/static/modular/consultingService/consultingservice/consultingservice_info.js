@@ -2,7 +2,37 @@
  * 初始化咨询服务管理详情对话框
  */
 var ConsultingserviceInfoDlg = {
-    consultingserviceInfoData : {}
+    consultingserviceInfoData : {},
+    validateFields: {
+        name: {
+            validators: {
+                notEmpty: {
+                    message: '姓名不能为空'
+                }
+            }
+        },
+        phone: {
+            validators: {
+                notEmpty: {
+                    message: '手机不能为空'
+                }
+            }
+        },
+        email: {
+            validators: {
+                notEmpty: {
+                    message: '邮箱不能为空'
+                }
+            }
+        },
+        companyName: {
+            validators: {
+                notEmpty: {
+                    message: '公司名称不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -56,6 +86,13 @@ ConsultingserviceInfoDlg.collectData = function() {
     .set('createTime')
     .set('updateTime');
 }
+/**
+ * 验证数据是否为空
+ */
+ConsultingserviceInfoDlg.validate = function () {
+    $('#conInfoForm').bootstrapValidator('validate');
+    return $("#conInfoForm").data('bootstrapValidator').isValid();
+};
 
 /**
  * 提交添加
@@ -64,6 +101,10 @@ ConsultingserviceInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
+
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/consultingservice/add", function(data){
@@ -98,5 +139,5 @@ ConsultingserviceInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    Feng.initValidator("conInfoForm", ConsultingserviceInfoDlg.validateFields);
 });

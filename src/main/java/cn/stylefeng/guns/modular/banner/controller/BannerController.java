@@ -82,11 +82,13 @@ public class BannerController extends BaseController {
         }
 
         String fileName = img_url.getOriginalFilename();
-        String filePath = "C:/Users/12778/Desktop/img/";
+        String filePath = "/home/installPackage/imgs/";
+        /*String filePath = "C:/Users/12778/Desktop/img/";*/
         File dest = new File(filePath + fileName);
         try {
+            String saveUrl = "http://merrybay.tlhe.cn/caseDemo/showImg?imgUrl=";
             img_url.transferTo(dest);
-            banner.setImgLink(filePath + fileName);
+            banner.setImgLink(saveUrl + fileName);
             bannerService.insert(banner);
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -4,33 +4,38 @@
         <div class="form-horizontal">
 
             <div class="row">
-                <div class="col-sm-6 b-r">
                             <#input id="id" name="ID" value="${item.id}" underline="true" readonly="readonly"/>
-                            <!--<#input id="category" name="0:技术,1:销售,2:行政" value="${item.category}" underline="true"/>-->
-                    &nbsp;&nbsp;&nbsp;<b>服务类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
-                    <select name="type" id="type"  style="width: 240px;height: 30px;margin-bottom: 30px" >
-                        <option value="">请选择服务类型</option>
-                        <option value="0">APP开发</option>
-                        <option value="1">网站建设</option>
-                        <option value="2">微信小程序</option>
-                    </select>
+                            <!--<#input id="category" name="岗位类型" value="${item.category}" underline="true"/>-->
+                <div style="margin-left: 77px;margin-bottom: -25px;"><b>请选择岗位类型</b></div>
+                            <select name="category" id="category"  style="width: 550px;height: 34px;margin-bottom: 30px;margin-left: 193px" >
+                                <option value="">请选择岗位类型</option>
+                                <option value="0">技术</option>
+                                <option value="1">销售</option>
+                                <option value="2">行政</option>
+                            </select>
                             <#input id="place" name="招聘地点" value="${item.place}" underline="true"/>
                             <#input id="email" name="邮箱" value="${item.email}" underline="true"/>
                             <#input id="phone" name="电话" value="${item.phone}" underline="true"/>
                             <#input id="num" name="招聘人数" value="${item.num}" underline="true"/>
                             <#input id="year" name="工作经验(年数)" value="${item.year}" />
-                </div>
-
-                <div class="col-sm-6">
-                            <#input id="jobsName" name="岗位名称" value="${item.jobsName}" underline="true"/>
-                            <#input id="jobsRequire" name="岗位要求" value="${item.jobsRequire}" underline="true"/>
-                            <#input id="jobsDuty" name="岗位职责" value="${item.jobsDuty}" underline="true"/>
-                </div>
+                    <#input id="jobsName" name="岗位名称" value="${item.jobsName}" underline="true"/>
+                    <div><b>岗位要求:</b></div>
+                    <div style="margin-left: 20px">
+                        <textarea  name="content" class="common-textarea"  id="content" style="width:100%; height:380px;visibility:hidden;">
+                            ${item.jobsRequire}
+                        </textarea>
+                    </div>
+                    <div style="margin-left: 20px;margin-top: 92px"><b>岗位职责:</b>
+                        <textarea name="jobsDuty" class="common-textarea" id="jobsDuty" style="width:100%; height:380px;visibility:hidden;">
+                            ${item.jobsDuty}
+                        </textarea>
+                    </div>
             </div>
 
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="HumanInfoDlg.editSubmit()"/>
+                    <a onclick="sub()" class="btn btn-primary">提交</a>
+                    <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="HumanInfoDlg.editSubmit()"/>-->
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="HumanInfoDlg.close()"/>
                 </div>
             </div>
@@ -39,4 +44,80 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/human/human/human_info.js"></script>
+<script src="${ctxPath}/static/js/plugins/wangEditor/wangEditor.js"></script>
+<script src="${ctxPath}/static/js/editor/kindeditor-all-min.js"></script>
+<!--<script type="text/javascript">
+    $(document).ready(function(){
+        var category = $('#category').val();
+        if(category == 0){
+            $('#category').val("技术").attr("readonly", true);
+        }
+        if(category == 1){
+            $('#category').val("销售").attr("readonly", true);
+        }
+        if(category == 2){
+            $('#category').val("行政").attr("readonly", true);
+        }
+      //  alert(category);
+    })
+</script>-->
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+        var editor = KindEditor.create('textarea[name="content"]', {
+            uploadJson :  '/human/fileUpload',
+            fileManagerJson :  '/human/fileManager',
+            allowFileManager : true,
+            items : ['source', '|', 'undo', 'redo', '|', 'preview', 'template', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image','multiimage',
+                'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink'],
+            //编辑器失去焦点(blur)时执行的回调函数。
+            // =========必须要有==========
+            afterBlur: function () { this.sync(); }
+        });
+
+        KindEditor.ready(function(J) {
+            var editor = KindEditor.create('textarea[name="jobsDuty"]', {
+                uploadJson :  '/human/fileUpload',
+                fileManagerJson :  '/human/fileManager',
+                allowFileManager : true,
+                items : ['source', '|', 'undo', 'redo', '|', 'preview', 'template', 'cut', 'copy', 'paste',
+                    'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                    'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                    'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                    'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                    'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image','multiimage',
+                    'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                    'anchor', 'link', 'unlink'],
+                //编辑器失去焦点(blur)时执行的回调函数。
+                // =========必须要有==========
+                afterBlur: function () { this.sync(); }
+            });
+
+        });
+
+    });
+    function sub() {
+        var id = $('#id').val();//id
+        var html = $('#content').val();//岗位要求
+        var category = $('#category').val();//岗位类型
+        var place = $('#place').val();//招聘地点
+        var email = $('#email').val();//邮箱
+        var phone = $('#phone').val();//电话
+        var num = $('#num').val();//招聘人数
+        var year = $('#year').val();//工作经验年数
+        var jobsName = $('#jobsName').val();//岗位名称
+        var jobsDuty = $('#jobsDuty').val();//岗位职责
+        $.post("/human/update",{ id : id , 'content' : html, category : category, 'place' : place, 'email': email, 'phone' : phone, num : num, year : year, 'jobsName' : jobsName, 'jobsDuty': jobsDuty },function (result) {
+            Feng.success("修改成功!");
+            window.parent.Human.table.refresh();
+            HumanInfoDlg.close();
+        })
+    }
+
+</script>
 @}

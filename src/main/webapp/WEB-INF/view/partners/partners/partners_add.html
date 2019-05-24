@@ -2,7 +2,6 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="form-horizontal">
-
             <!--<div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="imgName" name="图片名称" underline="true"/>
@@ -10,21 +9,21 @@
                             <#input id="describe" name="描述" underline="true"/>
                             <#input id="link" name="超链接"/>
                 </div>
-
             </div>-->
             <div class="row">
-                <form method="post" action="/partners/add" enctype="multipart/form-data">
-                    <div class="col-sm-6 b-r">
+                <form method="post" id="startFlowForm" action="/partners/add" enctype="multipart/form-data">
                         <#input id="imgName" name="图片名称" underline="true"/>
                         <#input id="imgLink" name="图片地址" underline="true"/>
                         <#input id="describe" name="描述" underline="true"/>
-                        选择图片：<input type="file" name="img_url" id="img_url" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="提交">
+                        <#input id="link" name="超链接"/>
+                        <div style="margin-bottom: 100px; margin-left: 113px;"><b>选择图片</b></div>
+                    <div style="margin-left: 191px;margin-top: -111px;"><input type="file" name="img_url" id="img_url" class="form-control"></div>
+                    <div class="form-group" style="margin-left: 109px;margin-top: 18px;">
+                        <input type="button" class="btn btn-primary" value="提交" onclick="sub()">
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="PartnersInfoDlg.close()"/>
                     </div>
                 </form>
-
+            </div>
             <!--<div class="row btn-group-m-t">
                 <div class="col-sm-10">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="PartnersInfoDlg.addSubmit()"/>
@@ -32,8 +31,18 @@
                 </div>
             </div>-->
         </div>
-
     </div>
 </div>
 <script src="${ctxPath}/static/modular/partners/partners/partners_info.js"></script>
+<script src="${ctxPath}/static/js/jquery.form.js"></script>
+<script type="text/javascript">
+    function sub() {
+        $("#startFlowForm").ajaxSubmit(function () {
+            Feng.success("添加成功!");
+            window.parent.Partners.table.refresh();
+            PartnersInfoDlg.close();
+        });
+
+    }
+</script>
 @}

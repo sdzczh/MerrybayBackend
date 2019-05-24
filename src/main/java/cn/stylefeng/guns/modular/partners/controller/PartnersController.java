@@ -79,10 +79,12 @@ public class PartnersController extends BaseController {
 
         String fileName = img_url.getOriginalFilename();
         String filePath = "/home/installPackage/imgs/";
+       /* String filePath = "C:/Users/12778/Desktop/img/";*/
         File dest = new File(filePath + fileName);
         try {
+            String saveUrl = "http://merrybay.tlhe.cn/caseDemo/showImg?imgUrl=";
             img_url.transferTo(dest);
-            partners.setImgLink(filePath + fileName);
+            partners.setImgLink(saveUrl + fileName);
             partners.setDescribe(partners.getDescribe());
             partners.setLink(partners.getLink());
             partnersService.insert(partners);

@@ -18,6 +18,7 @@ CaseDemo.initColumn = function () {
             {title: '服务类型', field: 'type', visible: true, align: 'center', valign: 'middle'},
             {title: '标题', field: 'title', visible: true, align: 'center', valign: 'middle'},
             {title: '描述', field: 'describe', visible: true, align: 'center', valign: 'middle'},
+            {title: '图片地址', field: 'img_link', visible: true, align: 'center', valign: 'middle'},
             {title: '详情', field: 'details', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'create_time', visible: true, align: 'center', valign: 'middle'},
             {title: '更新时间', field: 'update_time', visible: true, align: 'center', valign: 'middle'},

@@ -2,24 +2,26 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="form-horizontal">
-
-            <div class="row">
-                <div class="col-sm-6 b-r">
                             <#input id="id" name="ID" value="${item.id}" underline="true" readonly="readonly"/>
-                            <#input id="type" name="0:行业新闻,1:公司动态" value="${item.type}" underline="true"/>
+                            <!--<#input id="type" name="新闻类型" value="${item.type}" underline="true"/>-->
+                            <div style="margin-left: 107px"><b>文章类型</b></div>
+                            <select id="type" name="type" class="form-control" style="width: 529px;margin-left:185px;margin-top:-27px;margin-bottom:20px;">
+                                <option value="0">行业新闻</option>
+                                <option value="1">公司动态</option>
+                            </select>
                             <#input id="title" name="标题" value="${item.title}" underline="true"/>
                             <#input id="describe" name="描述" value="${item.describe}" underline="true"/>
-                            <#input id="details" name="详情" value="${item.details}" />
-                </div>
-
-                <div class="col-sm-6">
+                            <!--<#input id="details" name="详情" value="${item.details}" />-->
                             <#input id="imgLink" name="图片地址" value="${item.imgLink}" underline="true"/>
-                </div>
+            <div style="margin-left: 20px">
+                        <textarea  name="content" class="common-textarea"  id="content" style="width:100%; height:380px;visibility:hidden;">
+                            ${item.details}
+                        </textarea>
             </div>
-
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="NewsInfoDlg.editSubmit()"/>
+                    <a onclick="sub()" class="btn btn-primary">提交</a>
+                    <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="NewsInfoDlg.editSubmit()"/>-->
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="NewsInfoDlg.close()"/>
                 </div>
             </div>
@@ -28,4 +30,41 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/news/news/news_info.js"></script>
+<script src="${ctxPath}/static/js/plugins/wangEditor/wangEditor.js"></script>
+<script src="${ctxPath}/static/js/editor/kindeditor-all-min.js"></script>
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+        var editor = KindEditor.create('textarea[name="content"]', {
+            uploadJson :  '/news/fileUpload',
+            fileManagerJson :  '/news/fileManager',
+            allowFileManager : true,
+            items : ['source', '|', 'undo', 'redo', '|', 'preview', 'template', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image','multiimage',
+                'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink'],
+            //编辑器失去焦点(blur)时执行的回调函数。
+            // =========必须要有==========
+            afterBlur: function () { this.sync(); }
+        });
+
+    });
+    function sub() {
+        var id = $('#id').val();
+        var html = $('#content').val();
+        var type = $('#type').val();
+        var title = $('#title').val();
+        var describe = $('#describe').val();
+        var imgLink = $('#imgLink').val();
+        $.post("/news/update",{ id : id , 'content' : html, type : type, 'title' : title, 'describe': describe, 'imgLink' :imgLink },function (result) {
+            Feng.success("修改成功!");
+            window.parent.News.table.refresh();
+            NewsInfoDlg.close();
+        })
+    }
+
+</script>
 @}

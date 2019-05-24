@@ -15,11 +15,12 @@ ServiceProvider.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: 'ID', field: 'id', visible: true, align: 'center', valign: 'middle'},
+            {title: '标题', field: 'bb', visible: true, align: 'center', valign: 'middle'},
             {title: '服务类型', field: 'type', visible: true, align: 'center', valign: 'middle'},
             {title: '图片地址', field: 'imgLink', visible: true, align: 'center', valign: 'middle'},
             {title: '描述', field: 'describe', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '更新时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'}
+            {title: '更新时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'},
     ];
 };
 

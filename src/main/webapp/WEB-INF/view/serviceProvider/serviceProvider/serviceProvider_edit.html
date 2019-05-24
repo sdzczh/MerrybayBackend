@@ -6,6 +6,7 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="id" name="ID" value="${item.id}" underline="true" readonly="readonly"/>
+                    <#input id="bb" name="标题" value="${item.bb}" underline="true"/>
                             <!--<#input id="type" name="0:APP开发,1:网站建设,2:微信小程序" value="${item.type}" underline="true"/>-->
                     &nbsp;&nbsp;&nbsp;<b>服务类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b><select name="type" id="type"  style="width: 200px;height: 30px;margin-bottom: 30px" >
                     <option value="">请选择服务类型</option>
@@ -13,7 +14,7 @@
                     <option value="1">网站建设</option>
                     <option value="2">微信小程序</option>
                 </select>
-                            <!--<#input id="imgLink" name="图片地址" value="${item.imgLink}" underline="true"/>-->
+                            <#input id="imgLink" name="图片地址" value="${item.imgLink}" underline="true"/>
                             <#input id="describe" name="描述" value="${item.describe}" />
                 </div>
             </div>
