@@ -50,6 +50,6 @@ public class LedInfoWarpper extends BaseControllerWrapper {
     @Override
     protected void wrapTheMap(Map<String, Object> map) {
         map.put("type", ConstantFactory.me().getDictsByName("ledinfo", (Integer) map.get("type")));
-        map.put("state", ConstantFactory.me().getDictsByName("ledState", (Integer) map.get("state")));
+        map.put("state", ConstantFactory.me().getDictsByName("led管理", (Integer) map.get("state")));
     }
 }

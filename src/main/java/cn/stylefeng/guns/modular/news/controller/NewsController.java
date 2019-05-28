@@ -120,9 +120,9 @@ public class NewsController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String news) {
+    public Object list(Integer news) {
         EntityWrapper entityWrapper = new EntityWrapper();
-        if(!StrUtil.isEmpty(news)) {
+        if(news != null) {
             entityWrapper.eq("type", news);
         }
         entityWrapper.orderBy("id", false);

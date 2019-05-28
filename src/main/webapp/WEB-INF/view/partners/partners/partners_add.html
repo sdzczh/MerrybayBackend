@@ -11,7 +11,7 @@
                 </div>
             </div>-->
             <div class="row">
-                <form method="post" id="startFlowForm" action="/partners/add" enctype="multipart/form-data">
+                    <form method="post" id="startFlowForm" action="/partners/add" enctype="multipart/form-data">
                         <#input id="imgName" name="图片名称" underline="true"/>
                         <#input id="imgLink" name="图片地址" underline="true"/>
                         <#input id="describe" name="描述" underline="true"/>
@@ -42,7 +42,6 @@
             window.parent.Partners.table.refresh();
             PartnersInfoDlg.close();
         });
-
     }
 </script>
 @}

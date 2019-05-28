@@ -123,8 +123,8 @@ public class LedInfoController extends BaseController {
             return "文件不能为空";
         }
         String fileName = img_url.getOriginalFilename();
-        /*String filePath = "/home/installPackage/imgs/";*/
-        String filePath = "I:/img/";
+        String filePath = "/home/installPackage/imgs/";
+        /*String filePath = "C:/Users/12778/Desktop/img/";*/
         File dest = new File(filePath + fileName);
         try {
             String saveUrl = "http://merrybay.tlhe.cn/caseDemo/showImg?imgUrl=";
