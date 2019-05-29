@@ -17,6 +17,7 @@ Banner.initColumn = function () {
             {title: 'ID', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '图片名称', field: 'imgName', visible: true, align: 'center', valign: 'middle'},
             {title: '图片地址', field: 'imgLink', visible: true, align: 'center', valign: 'middle'},
+            {title: '图片类型', field: 'aa', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
             {title: '修改时间', field: 'updateTime', visible: true, align: 'center', valign: 'middle'}
     ];
@@ -89,13 +90,13 @@ Banner.delete = function () {
  */
 Banner.search = function () {
     var queryData = {};
-    queryData['imgName'] = $("#imgName").val();
+    queryData['aa'] = $("#aa").val();
     Banner.table.refresh({query: queryData});
 };
 
 $(function () {
     var defaultColunms = Banner.initColumn();
     var table = new BSTable(Banner.id, "/banner/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     Banner.table = table.init();
 });

@@ -2,8 +2,14 @@ package cn.stylefeng.guns.modular.banner.controller;
 
 import cn.hutool.core.date.DateUtil;
 import cn.stylefeng.guns.core.common.DateUtils;
+import cn.stylefeng.guns.core.common.constant.factory.PageFactory;
+import cn.stylefeng.guns.core.common.page.PageInfoBT;
+import cn.stylefeng.guns.modular.system.model.News;
+import cn.stylefeng.guns.modular.system.warpper.ImgTypeWarpper;
+import cn.stylefeng.guns.modular.system.warpper.NewsWarpper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -17,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 首页展示控制器
@@ -65,10 +73,16 @@ public class BannerController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String imgName) {
+    public Object list(Integer aa) {
         EntityWrapper entityWrapper = new EntityWrapper();
-        entityWrapper.like("img_name", imgName);
-        return bannerService.selectList(entityWrapper);
+        if(aa != null) {
+            entityWrapper.eq("aa", aa);
+        }
+        entityWrapper.orderBy("id", false);
+        Page<Banner> page = new PageFactory<Banner>().defaultPage();
+        List<Map<String, Object>> list = bannerService.selectMaps(entityWrapper);
+        page.setRecords(new ImgTypeWarpper(list).wrap());
+        return new PageInfoBT<>(page);
     }
 
     /**
@@ -82,8 +96,8 @@ public class BannerController extends BaseController {
         }
 
         String fileName = img_url.getOriginalFilename();
-        String filePath = "/home/installPackage/imgs/";
-        /*String filePath = "C:/Users/12778/Desktop/img/";*/
+        /*String filePath = "/home/installPackage/imgs/";*/
+        String filePath = "C:/Users/12778/Desktop/img/";
         File dest = new File(filePath + fileName);
         try {
             String saveUrl = "http://merrybay.tlhe.cn/caseDemo/showImg?imgUrl=";
