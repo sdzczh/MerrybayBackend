@@ -182,6 +182,7 @@ public class ShiroConfig {
         hashMap.put("/kaptcha", "anon");
         hashMap.put("/caseDemo/showImg", "anon");
         hashMap.put("/ledInfo/get", "anon");
+        hashMap.put("/version/get", "anon");
         hashMap.put("/**", "user");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;
