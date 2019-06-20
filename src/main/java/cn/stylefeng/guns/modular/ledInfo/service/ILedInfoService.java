@@ -33,4 +33,8 @@ public interface ILedInfoService extends IService<LedInfo> {
     Integer selectStateByType(Integer type);
 
     List<Map<String, Object>> selectByState();
+
+    List<String> selectByType(Integer type);
+
+    Integer selectByUse();
 }

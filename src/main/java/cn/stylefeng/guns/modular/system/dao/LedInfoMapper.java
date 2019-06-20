@@ -29,4 +29,8 @@ public interface LedInfoMapper extends BaseMapper<LedInfo> {
     Integer selectStateByType(@Param("type") Integer type);
 
     List<Map<String, Object>> selectByState();
+
+    List<String> selectByType(@Param("type") Integer type);
+
+    Integer selectByUse();
 }

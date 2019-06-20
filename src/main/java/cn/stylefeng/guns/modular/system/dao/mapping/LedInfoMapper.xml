@@ -29,6 +29,12 @@
     <select id="selectByState" resultType="map">
         SELECT li.type, img_link FROM led_info li WHERE state = 1;
     </select>
+    <select id="selectByType" resultType="string">
+        SELECT img_link FROM led_info li WHERE li.type = #{type};
+    </select>
+    <select id="selectByUse" resultType="int">
+        SELECT type FROM led_info WHERE state = 1 limit 0,1;
+    </select>
     <update id="updateImgByType">
         update led_info set state = 1 WHERE type = 0;
     </update>

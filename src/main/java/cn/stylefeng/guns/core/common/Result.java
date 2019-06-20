@@ -46,6 +46,13 @@ public class Result implements Serializable{
 		result.setData(obj);
 		return toJsonString(result);
 	}
+	public static Result toResult2(ResultCode resultCode,Object obj) {
+		Result result = new Result();
+		result.setCode(resultCode.code());
+		result.setMsg(resultCode.message());
+		result.setData(obj);
+		return result;
+	}
 
 	/**
 	 * 返回Result的jsonString

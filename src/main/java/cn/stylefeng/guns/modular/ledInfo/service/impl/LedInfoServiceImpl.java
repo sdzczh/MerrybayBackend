@@ -57,4 +57,14 @@ public class LedInfoServiceImpl extends ServiceImpl<LedInfoMapper, LedInfo> impl
     public List<Map<String, Object>> selectByState() {
         return ledInfoMapper.selectByState();
     }
+
+    @Override
+    public List<String> selectByType(Integer type) {
+        return ledInfoMapper.selectByType(type);
+    }
+
+    @Override
+    public Integer selectByUse() {
+        return ledInfoMapper.selectByUse();
+    }
 }

@@ -118,7 +118,7 @@ public class VersionController extends BaseController {
      */
     @RequestMapping(value = "/get")
     @ResponseBody
-    public String get(Integer updateVersion) {
+    public Object get(Integer updateVersion) {
         EntityWrapper entityWrapper = new EntityWrapper();
         entityWrapper.gt("update_version", updateVersion);
         List<Map<String, Object>> list = versionService.selectList(entityWrapper);
@@ -126,14 +126,14 @@ public class VersionController extends BaseController {
         if(list.size() == 0){
             map.put("data", new HashMap<>());
             map.put("update_flag", false);
-            return Result.toResult(ResultCode.SUCCESS, map);
+            return Result.toResult2(ResultCode.SUCCESS, map);
         }else{
             entityWrapper = new EntityWrapper();
             entityWrapper.eq("update_flag", 1);
             map.put("update_flag", true);
             list = versionService.selectList(entityWrapper);
             map.put("data", list.get(0));
-            return Result.toResult(ResultCode.SUCCESS, map);
+            return Result.toResult2(ResultCode.SUCCESS, map);
         }
     }
 }

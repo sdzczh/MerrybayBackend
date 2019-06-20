@@ -1,6 +1,8 @@
 package cn.stylefeng.guns.modular.ledInfo.controller;
 
 import cn.hutool.core.util.StrUtil;
+import cn.stylefeng.guns.core.common.Result;
+import cn.stylefeng.guns.core.common.ResultCode;
 import cn.stylefeng.guns.modular.system.warpper.HumanWarpper;
 import cn.stylefeng.guns.modular.system.warpper.LedInfoWarpper;
 import cn.stylefeng.roses.core.base.controller.BaseController;
@@ -19,7 +21,6 @@ import cn.stylefeng.guns.modular.ledInfo.service.ILedInfoService;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.naming.spi.DirStateFactory;
-import javax.xml.transform.Result;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -185,8 +186,14 @@ public class LedInfoController extends BaseController {
      */
     @RequestMapping(value = "/get")
     @ResponseBody
-    public String get() {
-        List<Map<String, Object>> list = ledInfoService.selectByState();
-        return JSONObject.toJSONString(list);
+    public Object get() {
+        List<String> list = ledInfoService.selectByType(0);
+        Map<String, Object> map = new HashMap<>();
+        map.put("bannerBean", list);
+        List<String> videos = ledInfoService.selectByType(1);
+        map.put("videosUrl", videos.get(0));
+        Integer type = ledInfoService.selectByUse();
+        map.put("type", type);
+        return Result.toResult2(ResultCode.SUCCESS, map);
     }
 }
